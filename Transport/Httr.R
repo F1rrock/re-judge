@@ -7,13 +7,20 @@ source("Text/Text.R")
 
 driver.httr <- structure(
   list(
-    connection = function(method, url, headers, body, encode = "multipart") {
+    connection = function(
+      method, url, 
+      headers = media.c, 
+      body = media.list, 
+      jar = media.c, 
+      encode = "multipart"
+    ) {
       structure(
         list(
           method  = method,
           url     = url,
           headers = headers,
           body    = body,
+          jar     = jar,
           encode  = encode
         ),
         class = "httr_connection"
@@ -25,13 +32,15 @@ driver.httr <- structure(
 
 headers.httr_driver  <- function(x) media.c
 body.httr_driver     <- function(x) media.list
+jar.httr_driver      <- function(x) media.c
 
 response.httr_connection <- function(x) {
   r <- httr::VERB(
-    contents(x$method), 
-    url = contents(x$url), 
+    verb   = contents(x$method), 
+    url    = contents(x$url), 
     body   = src(x$body),
     httr::add_headers(.headers = src(x$headers)), 
+    httr::set_cookies(.cookies = src(x$jar)),
     encode = contents(x$encode)
   )
   list(
