@@ -13,11 +13,9 @@ text.regex <- function(pattern, origin, default = NA_character_) {
 
 contents.regex_text <- function(x) {
   val <- contents(x$origin)
-  first(
-    contents(x$default),
-    regmatches(
-      val,
-      regexec(contents(x$pattern), val)
-    )[[1]][-1]
-  )
+  match <- regmatches(
+    val,
+    regexec(contents(x$pattern), val)
+  )[[1]][-1]
+  if (length(match) > 0) match[[1]] else contents(x$default)
 }
