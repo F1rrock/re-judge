@@ -1,38 +1,20 @@
-library(httr)
-source("Transport/Driver/Driver.R")
-source("Transport/Connection/Connection.R")
-source("Media/C.R")
-source("Media/List.R")
 source("Text/Text.R")
+source("Http/Media/Media.R")
+source("Http/Connection/Connection.R")
 
-driver.httr <- structure(
-  list(
-    connection = function(
-      method, url, 
-      headers = media.c, 
-      body = media.list, 
-      jar = media.c, 
-      encode = "multipart"
-    ) {
-      structure(
-        list(
-          method  = method,
-          url     = url,
-          headers = headers,
-          body    = body,
-          jar     = jar,
-          encode  = encode
-        ),
-        class = "httr_connection"
-      )
-    }
-  ),
-  class = "httr_driver"
-)
-
-headers.httr_driver  <- function(x) media.c
-body.httr_driver     <- function(x) media.list
-jar.httr_driver      <- function(x) media.c
+httr.connection <- function(method, url, headers, body, jar, encode) {
+  structure(
+    list(
+      method  = method,
+      url     = url,
+      headers = headers,
+      body    = body,
+      jar     = jar,
+      encode  = encode
+    ),
+    class = "httr_connection"
+  )
+}
 
 response.httr_connection <- function(x) {
   r <- httr::VERB(

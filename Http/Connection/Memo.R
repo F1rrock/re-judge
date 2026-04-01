@@ -1,4 +1,4 @@
-source("Transport/Connection/Connection.R")
+source("Http/Connection/Connection.R")
 
 connection.memo = function(x) {
   structure(

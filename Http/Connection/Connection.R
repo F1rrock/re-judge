@@ -3,7 +3,7 @@ response <- function(x) UseMethod("response")
 response.default <- function(x) {
   stop(
     sprintf(
-      "headers() is not implemented for %s",
+      "response() is not implemented for %s",
       paste(class(x), collapse = "/")
     )
   )

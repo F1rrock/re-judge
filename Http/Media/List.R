@@ -1,5 +1,6 @@
 source("Text/Text.R")
-source("Media/Media.R")
+source("Http/Media/Media.R")
+source("Http/Media/Member/Member.R")
 
 media.list <- local({
   this <- function(x) {
@@ -8,7 +9,7 @@ media.list <- local({
         origin = x,
         with = function(key, val) {
           out <- x
-          out[[contents(key)]] <- contents(val)
+          out[[contents(key)]] <- entry(val)
           this(out)
         }
       ),

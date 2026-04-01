@@ -1,8 +1,8 @@
-source("Transport/Connection/Memo.R")
-source("Transport/Connection/Successful.R")
-source("Transport/Connection/Retried.R")
-source("Transport/Connection/Timed.R")
-source("Transport/Connection/Logged.R")
+source("Http/Connection/Memo.R")
+source("Http/Connection/Successful.R")
+source("Http/Connection/Retried.R")
+source("Http/Connection/Timed.R")
+source("Http/Connection/Logged.R")
 
 connection.ready <- function(x) {
   connection.memo(

@@ -1,4 +1,4 @@
-source("Transport/Connection/Connection.R")
+source("Http/Connection/Connection.R")
 source("Text/Text.R")
 
 connection.logged <- function(m, v) {
