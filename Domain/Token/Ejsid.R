@@ -1,4 +1,4 @@
-source("Text/Text.R")
+source("Token/Token.R")
 source("Collection/Filter.R")
 source("Collection/Map.R")
 source("Collection/First.R")
@@ -7,21 +7,31 @@ source("Collection/Cookies.R")
 ejsid <- function(session) {
   structure(
     list(
-      origin = collection.map(
-        function(ck) ck$value,
-        collection.filter(
-          function(ck) identical(ck$name, "EJSID"),
-          collection.cookies(session)
-        )
+      origin = collection.filter(
+        function(ck) identical(ck$name, "EJSID"),
+        collection.cookies(session)
       )
     ),
     class = "ejsid"
   )
 }
 
-contents.ejsid <- function(x) {
+value.ejsid <- function(x) {
   collection.first(
     default = NA_character_,
-    x$origin
+    collection.map(
+      function(ck) ck$value,
+      x$origin
+    )
+  )
+}
+
+expiration.ejsid <- function(x) {
+  collection.first(
+    default = NA_character_,
+    collection.map(
+      function(ck) ck$expiration,
+      x$origin
+    )
   )
 }

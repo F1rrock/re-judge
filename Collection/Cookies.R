@@ -3,7 +3,7 @@ source("Collection/Collection.R")
 collection.cookies <- function(session) {
   structure(
     list(
-      session = s
+      session = session
     ),
     class = "collection_cookies"
   )
