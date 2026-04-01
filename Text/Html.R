@@ -1,3 +1,4 @@
+source("Text/Text.R")
 source("Session/Session.R")
 
 text.html <- function(s) {
@@ -5,10 +6,10 @@ text.html <- function(s) {
     list(
       session = s
     ),
-    class = "html_text"
+    class = "text_html"
   )
 }
 
-contents.html_text <- function(x) {
+contents.text_html <- function(x) {
   html(x$session)
 }

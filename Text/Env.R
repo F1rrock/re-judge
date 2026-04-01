@@ -1,4 +1,3 @@
-library(dotenv)
 source("Text/Text.R")
 
 text.env <- function(x) {
@@ -11,7 +10,7 @@ text.env <- function(x) {
 }
 
 contents.text_env <- function(x) {
-  load_dot_env()
+  dotenv::load_dot_env()
   Sys.getenv(
     contents(x$value),
     unset = NA_character_
