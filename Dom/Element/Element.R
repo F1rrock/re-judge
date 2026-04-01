@@ -1,9 +1,9 @@
-value <- function(x) UseMethod("value")
+node <- function(x) UseMethod("node")
 
-value.default <- function(x) {
+node.default <- function(x) {
   stop(
     sprintf(
-      "value() is not implemented for %s",
+      "node() is not implemented for %s",
       paste(class(x), collapse = "/")
     )
   )

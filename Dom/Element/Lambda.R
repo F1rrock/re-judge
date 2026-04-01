@@ -9,4 +9,4 @@ element.lambda <- function(f) {
   )
 }
 
-value.element_lambda <- function(x) x$callback()
+node.element_lambda <- function(x) x$callback()

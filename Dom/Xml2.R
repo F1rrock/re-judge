@@ -1,5 +1,3 @@
-library(xml2)
-library(rvest)
 source("Dom/Engine/Engine.R")
 source("Dom/Element/Element.R")
 source("Dom/Element/Lambda.R")
@@ -22,14 +20,14 @@ dom.xml2_engine <- function(x) {
     selection = function(selector, element) {
       element.lambda(function() {
         rvest::html_element(
-          value(element),
+          node(element),
           css = contents(selector)
         )
       })
     },
     children = function(element) {
       collection.lambda(function() {
-        xs <- xml2::xml_children(value(element))
+        xs <- xml2::xml_children(node(element))
         lapply(
           seq_along(xs),
           function(i) {
@@ -40,9 +38,9 @@ dom.xml2_engine <- function(x) {
       })
     },
     matches = function(selector, element) {
-      v <- value(element)
-      if (inherits(v, "xml_missing")) return(FALSE)
-      parent <- xml2::xml_parent(v)
+      n <- node(element)
+      if (inherits(n, "xml_missing")) return(FALSE)
+      parent <- xml2::xml_parent(n)
       if (inherits(parent, "xml_missing")) return(FALSE)
       xs <- rvest::html_elements(
         parent,
@@ -51,14 +49,14 @@ dom.xml2_engine <- function(x) {
       any(
         vapply(
           seq_along(xs),
-          function(i) identical(xs[[i]], v),
+          function(i) identical(xs[[i]], n),
           logical(1)
         )
       )
     },
     txt = function(element) {
       text.lambda(function() {
-        xml2::xml_text(value(element), trim = TRUE)
+        xml2::xml_text(node(element), trim = TRUE)
       })
     }
   )
