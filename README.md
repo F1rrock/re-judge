@@ -1,110 +1,77 @@
 # ReJudge
 
-ReJudge is an R library for working with **ejudge** from R through a set of small composable objects.
+ReJudge is an R library for working with **ejudge** directly from RStudio: browse problems, submit solutions, and interact with contests without leaving the console.
 
-The project aims to make ejudge interactions scriptable and reusable: authenticate, fetch pages, extract structured data from HTML, and build higher-level workflows on top of that foundation.
+## Architecture
 
-## Current architecture
-
-The project is organized around several focused layers.
+The project is organized around focused, composable layers. Each layer exposes a small interface and stays independent of the others.
 
 - **Text** — lazy text values and adapters with `contents(...)`
-- **Collection** — lazy sequence-like transformations with `items(...)`
-- **Dom** — HTML navigation and extraction over a concrete DOM engine
-- **Element** — lazy DOM nodes
-- **Http** — HTTP-facing request construction and concrete adapters
-- **Session** — authenticated ejudge session objects
-- **Page** — page builders that return HTML-producing page objects
-- **Token** — token-like values with `value(...)` and `expiration(...)`
-- **Domain** — ejudge-specific projections and extractors
-
-This split keeps ejudge-specific logic separate from:
-
-- HTTP implementation details
-- HTML parsing technology
-- low-level collection processing
+- **Collection** — lazy sequence transformations with `items(...)`
+- **Dom** — HTML navigation over a concrete DOM engine
+- **Http** — HTTP request construction and concrete adapters
+- **Session** — authenticated session objects
+- **Page** — ejudge pages as composable objects
+- **Domain** — business logic for working with ejudge
+- **Json** — lazy JSON parsing with a `fields(...)` interface
+- **Status** — run status objects with an `ok(...)` interface
+- **Script** — executable scripts with a `result(...)` interface
+- **File** — files as composable objects
+- **Spec** — specifications with input and output
+- **Token** — tokens as composable objects
+- **Workspace** — user environment integration
+- **App** — top-level workflows: problem browsing and submission
 
 ## HTTP layer
 
-The old transport layer has been reshaped into a more explicit **Http** layer.
-
-It currently includes:
-
 - **Driver** — selects a concrete HTTP backend
-- **Request** — request-related capabilities such as:
-  - headers
-  - body
-  - cookie jar
-- **Attachment** — HTTP attachment capabilities such as multipart file upload
-- **Connection** — response-producing HTTP connection objects
-- **Media** — request media containers and media members
-- **Httr** — concrete implementation backed by `httr`
-
-This makes low-level HTTP concerns more explicit and easier to swap or extend.
-
-## HTML and extraction
-
-HTML processing is split from HTTP and domain logic.
-
-- **Dom** provides a DOM-like interface through an engine
-- **Element** represents lazy DOM nodes
-- **Collection** powers lazy traversal pipelines
-- **Domain** extractors can work on top of pages without knowing about `xml2`, `rvest`, or `httr`
-
-At the moment the project includes an `xml2`-based DOM engine and a declarative extractor for problem statements.
-
-## Current capabilities
-
-The project currently supports:
-
-- building authenticated ejudge sessions
-- retrieving session HTML
-- retrieving cookies
-- extracting `SID`
-- extracting `EJSID`
-- extracting token expiration where available
-- fetching problem pages
-- extracting problem statements from problem pages
-- composing HTTP connection policies such as:
+- **Connection** — response-producing connection objects with composable policies:
   - logging
   - retries
   - timeout
   - memoization
   - successful-status checks
-- building multipart submit requests
+- **Attachment** — file attachment support
+- **Media** — request media containers and members
+- **Httr** — concrete implementation backed by `httr`
 
-## Direction
+## Installation
 
-The project is moving toward a fully composable model where ejudge actions are described through objects instead of ad-hoc scripts.
+Install the addin package from the `RePackage/` directory:
 
-This includes:
+```r
+devtools::install("RePackage")
+```
 
-- treating pages as first-class objects
-- treating tokens as their own values instead of plain text
-- separating HTML traversal from domain extraction
-- isolating HTTP backend details behind `Http/*`
+After installation the addins appear in the RStudio **Addins** menu:
+
+- **Description of the problem** — fetch the problem statement
+- **Submit the solution** — submit the current file to ejudge
 
 ## Environment
 
-Create a `.env` file based on `.env.example`.
-
-Example:
+Create a `.env` file based on `.env.example`:
 
 ```env
 LOGIN=your_login
 PASSWORD=your_password
 CONTEST_ID=1
+LANG_ID=28
 BASE_URL=http://0.0.0.0:90
 CLIENT_PATH=/ejudge
 ```
 
-`CLIENT_PATH` should point to the ejudge web client route.  
-Depending on the installation it may be something like:
+`CLIENT_PATH` depends on the ejudge installation.
 
-- `/ejudge`
-- `/new-client`
+## Writing solutions
+
+Solutions are plain R scripts. Use `scan()` for reading input — it works in RStudio interactive mode and on ejudge:
+
+```r
+x <- scan(quiet = TRUE)
+cat(x[1] + x[2])
+```
 
 ## Status
 
-The project is under active redesign.  
-The core layers are already in place, but naming and interface consistency are still being refined.
+The core layers are in place. The project continues to evolve toward a fully declarative model where all ejudge interactions are described through composable objects.
