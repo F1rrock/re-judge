@@ -1,0 +1,14 @@
+Package: ReJudge
+Type: Package
+Title: Tools for Working with Ejudge from RStudio
+Version: 0.0.1
+Authors@R: 
+    person("Kurtametov", "Emil", email = "flyrock000@gmail.com", role = c("aut", "cre"))
+Description: Tools and addins for working with ejudge from RStudio.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    httr,
+    xml2,
+    rstudioapi

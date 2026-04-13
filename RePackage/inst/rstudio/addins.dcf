@@ -1,0 +1,9 @@
+Name: Description of the problem
+Description: Show the ejudge problem for the current file
+Binding: problem
+Interactive: false
+
+Name: Submit the solution
+Description: Submit current file as ejudge solution
+Binding: submit
+Interactive: false
