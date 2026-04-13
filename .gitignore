@@ -2,4 +2,4 @@
 .RData
 .Ruserdata
 .Rproj.user/
-.env
+.env.DS_Store
