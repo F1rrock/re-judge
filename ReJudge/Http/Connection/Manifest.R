@@ -1,0 +1,8 @@
+source("ReJudge/Http/Connection/Connection.R")
+source("ReJudge/Http/Connection/Fake.R")
+source("ReJudge/Http/Connection/Logged.R")
+source("ReJudge/Http/Connection/Memo.R")
+source("ReJudge/Http/Connection/Retried.R")
+source("ReJudge/Http/Connection/Successful.R")
+source("ReJudge/Http/Connection/Timed.R")
+source("ReJudge/Http/Connection/Presets/Manifest.R")

@@ -1,0 +1,6 @@
+source("ReJudge/Http/Attachment/Manifest.R")
+source("ReJudge/Http/Connection/Manifest.R")
+source("ReJudge/Http/Driver/Manifest.R")
+source("ReJudge/Http/Httr/Manifest.R")
+source("ReJudge/Http/Media/Manifest.R")
+source("ReJudge/Http/Request/Manifest.R")
