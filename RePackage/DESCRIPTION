@@ -11,4 +11,6 @@ LazyData: true
 Imports:
     httr,
     xml2,
+    rvest,
+    jsonlite,
     rstudioapi

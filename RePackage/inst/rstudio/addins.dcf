@@ -1,3 +1,8 @@
+Name: Available problems
+Description: Show available problem names for the current contest
+Binding: problems
+Interactive: false
+
 Name: Description of the problem
 Description: Show the ejudge problem for the current file
 Binding: problem
