@@ -27,6 +27,7 @@ source("ReJudge/App/Delegate.R")
 source("ReJudge/App/Console.R")
 source("ReJudge/Domain/Problem/Id.R")
 source("ReJudge/Domain/Problem/Description.R")
+source("ReJudge/Domain/Problem/Language.R")
 source("ReJudge/Domain/Problem/Examples.R")
 source("ReJudge/Domain/Submission/File.R")
 source("ReJudge/Domain/Submission/Title.R")
@@ -84,6 +85,20 @@ app.submit <- app.delegate(function() {
       )
     )
   })
+  language <- local({
+    lang <- problem.language(engine.xml2)
+    page <- page.problem(
+      driver = httr.driver,
+      address,
+      client
+    )
+    lang(
+      page(
+        session,
+        problem
+      )
+    )
+  })
   run <- local({
     id <- run.id(engine.xml2)
     page <- page.submit(
@@ -117,7 +132,7 @@ app.submit <- app.delegate(function() {
           id(
             page(
               session,
-              lang = text.variable("LANG_ID"),
+              lang = language,
               problem,
               file = submission.file(submission)
             )
