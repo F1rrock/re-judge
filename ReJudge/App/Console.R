@@ -14,25 +14,18 @@ app.console <- function(m) {
 
 perform.app_console <- function(x) {
   tryCatch(
-    cat(contents(
-      text.fstring("\014%s", x$message)
-    )),
-    error = function(e) {
-      trace <- paste(
-        vapply(
-          sys.calls(),
-          function(call) paste(deparse(call), collapse = ""),
-          character(1)
-        ),
-        collapse = "\n"
+    cat(
+      contents(
+        text.fstring("\014%s", x$message)
       )
+    ),
+    error = function(e) {
       cat(
         contents(
           text.red(
             text.fstring(
-              "Error: %s\n\nTrace:\n%s",
-              conditionMessage(e),
-              trace
+              "Error: %s",
+              conditionMessage(e)
             )
           )
         )
