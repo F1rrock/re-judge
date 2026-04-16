@@ -1,3 +1,4 @@
 # A
-x <- scan()
-cat(x[1] + x[2] + 1)
+
+xs <- scan()
+cat(xs[1] + xs[2])
