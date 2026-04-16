@@ -45,6 +45,7 @@ devtools::install("RePackage")
 
 After installation the addins appear in the RStudio **Addins** menu:
 
+- **Available problems** — fetch available problem names for the current contest
 - **Description of the problem** — fetch the problem statement
 - **Submit the solution** — submit the current file to ejudge
 
@@ -56,7 +57,6 @@ Create a `.env` file based on `.env.example`:
 LOGIN=your_login
 PASSWORD=your_password
 CONTEST_ID=1
-LANG_ID=28
 BASE_URL=http://0.0.0.0:90
 CLIENT_PATH=/ejudge
 ```
