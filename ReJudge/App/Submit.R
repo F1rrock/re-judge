@@ -1,14 +1,20 @@
 source("ReJudge/Text/Text.R")
+source("ReJudge/Text/First.R")
 source("ReJudge/Text/Join.R")
 source("ReJudge/Text/Bind.R")
 source("ReJudge/Text/Then.R")
 source("ReJudge/Text/Required.R")
+source("ReJudge/Text/Default.R")
 source("ReJudge/Text/Asserted.R")
 source("ReJudge/Text/Result.R")
 source("ReJudge/Text/Palette.R")
 source("ReJudge/Text/Presets/Variable.R")
+source("ReJudge/Number/Number.R")
+source("ReJudge/Number/Difference.R")
+source("ReJudge/Number/Str.R")
 source("ReJudge/Spec/Spec.R")
 source("ReJudge/Collection/Map.R")
+source("ReJudge/Collection/Drop.R")
 source("ReJudge/File/RFile.R")
 source("ReJudge/File/Required.R")
 source("ReJudge/Script/RScript.R")
@@ -28,9 +34,11 @@ source("ReJudge/App/Console.R")
 source("ReJudge/Domain/Problem/Id.R")
 source("ReJudge/Domain/Problem/Description.R")
 source("ReJudge/Domain/Problem/Language.R")
+source("ReJudge/Domain/Problem/Languages.R")
 source("ReJudge/Domain/Problem/Examples.R")
 source("ReJudge/Domain/Submission/File.R")
 source("ReJudge/Domain/Submission/Title.R")
+source("ReJudge/Domain/Submission/Language.R")
 source("ReJudge/Domain/Run/Id.R")
 source("ReJudge/Domain/Run/Status.R")
 source("ReJudge/Domain/Solution/Pooling.R")
@@ -86,16 +94,34 @@ app.submit <- app.delegate(function() {
     )
   })
   language <- local({
-    lang <- problem.language(engine.xml2)
-    page <- page.problem(
-      driver = httr.driver,
-      address,
-      client
-    )
-    lang(
-      page(
-        session,
-        problem
+    language <- problem.language(engine.xml2)
+    languages <- problem.languages(engine.xml2)
+    page <- local({
+      page <- page.problem(
+        driver = httr.driver,
+        address,
+        client
+      )
+      page(session, problem)
+    })
+    text.default(
+      fallback = text.required(
+        "can not identify problem's language",
+        text.first(
+          NA_character_,
+          collection.drop(
+            number.difference(
+              submission.language(
+                submission
+              ),
+              1
+            ),
+            languages(page)
+          )
+        )
+      ),
+      origin = text.nonempty(
+        language(page)
       )
     )
   })
