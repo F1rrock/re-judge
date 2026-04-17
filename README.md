@@ -65,9 +65,22 @@ CLIENT_PATH=/ejudge
 
 ## Writing solutions
 
-Solutions are plain R scripts. Use `scan()` for reading input — it works in RStudio interactive mode and on ejudge:
+Solutions are plain R scripts. Each file must contain a comment identifying the problem:
 
 ```r
+# problem: A3
+```
+
+Optionally, if the problem's language is not selected by default, add a second comment with the serial number of the language as it appears in the submission selector:
+
+```r
+# default language: 15
+```
+
+Use `scan()` for reading input — it works in RStudio interactive mode and on ejudge:
+
+```r
+# problem: A
 x <- scan(quiet = TRUE)
 cat(x[1] + x[2])
 ```

@@ -44,29 +44,28 @@ CLIENT_PATH=/ejudge
 
 You can place your solution file anywhere and name it however you like. Keeping solutions in `Src/` is preferred for consistency.
 
-Every file must contain a comment line with the problem ID. This is how the addins identify which problem you are working on:
+Every file must contain a comment with the problem name. This is how the addins identify which problem you are working on:
 
 ```r
-# A3
+# problem: A3
 ```
+
+Optionally, if the language for the problem is not selected automatically, add a second comment with the serial number of the language as it appears in the submission language selector (1-based):
+
+```r
+# default language: 15
+```
+
+ReJudge first tries to read the language from the problem page. If no language is pre-selected there, it falls back to `# default language`.
 
 ### Reading input
 
 Use `scan()` to read numbers:
 
 ```r
-# A
+# problem: A
 x <- scan(quiet = TRUE)
 cat(x[1] + x[2])
-```
-
-For multi-line input:
-
-```r
-# B
-n      <- scan(n = 1, quiet = TRUE)
-values <- scan(n = n, quiet = TRUE)
-cat(sum(values))
 ```
 
 If you use `readline()` or `readLines()`, always pass `file = "stdin"` explicitly:
@@ -83,16 +82,16 @@ Lists all problems available in the contest. Use this to discover problem names 
 
 ### Description of the problem
 
-Fetches and displays the problem statement. The currently open file must contain a problem comment (e.g. `# A3`).
+Fetches and displays the problem statement. The currently open file must contain a problem comment (e.g. `# problem: A3`).
 
 ### Submit the solution
 
-Submits the currently open file to ejudge and waits for the verdict. The result table is printed in the console when testing completes. The currently open file must contain a problem comment.
+Submits the currently open file to ejudge and waits for the verdict. The result table is printed in the console when testing completes. The currently open file must contain a problem comment (e.g. `# problem: A3`).
 
 ## Workflow
 
 1. Open **Addins → Available problems** to see the list of problems in the contest
-2. Create a solution file, add a comment with the chosen problem ID (e.g. `# M5`)
+2. Create a solution file, add a comment with the chosen problem name (e.g. `# problem: M5`)
 3. Open **Addins → Description of the problem** to read the problem statement
 4. Write your solution
 5. Open **Addins → Submit the solution** to submit
