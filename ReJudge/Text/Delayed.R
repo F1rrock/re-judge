@@ -1,4 +1,5 @@
 source("ReJudge/Text/Text.R")
+source("ReJudge/Number/Number.R")
 
 text.delayed <- function(sec, x) {
   structure(
@@ -11,6 +12,6 @@ text.delayed <- function(sec, x) {
 }
 
 contents.text_delayed <- function(x) {
-  Sys.sleep(x$seconds)
+  Sys.sleep(scalar(x$seconds))
   contents(x$origin)
 }

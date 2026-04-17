@@ -1,4 +1,5 @@
 source("ReJudge/Collection/Collection.R")
+source("ReJudge/Number/Number.R")
 
 collection.take <- function(n, xs) {
   structure(
@@ -16,7 +17,7 @@ items.collection_take <- function(x) {
     seq_len(
       min(
         length(xs), 
-        max(x$count, 0)
+        max(scalar(x$count), 0)
       )
     )
   ]

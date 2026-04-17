@@ -1,4 +1,5 @@
 source("ReJudge/Collection/Collection.R")
+source("ReJudge/Number/Number.R")
 
 collection.drop <- function(k, xs) {
   structure(
@@ -12,7 +13,7 @@ collection.drop <- function(k, xs) {
 
 items.collection_drop <- function(x) {
   xs <- items(x$origin)
-  k  <- x$count
+  k  <- scalar(x$count)
   if (k <= 0) return(xs)
   if (k >= length(xs)) return(base::list())
   xs[(k + 1):length(xs)]

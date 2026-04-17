@@ -1,3 +1,4 @@
+source("ReJudge/Number/Number.R")
 source("ReJudge/Http/Connection/Connection.R")
 
 connection.retried <- function(t, x) {
@@ -20,5 +21,5 @@ response.connection_retried <- function(x) {
       }
     )
   }
-  attempt(x$times)
+  attempt(scalar(x$times))
 }

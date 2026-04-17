@@ -1,3 +1,4 @@
+source("ReJudge/Number/Number.R")
 source("ReJudge/Http/Connection/Connection.R")
 
 connection.timed <- function(s, x) {
@@ -12,7 +13,7 @@ connection.timed <- function(s, x) {
 
 response.connection_timed <- function(x) {
   setTimeLimit(
-    elapsed = x$seconds, 
+    elapsed = scalar(x$seconds), 
     transient = TRUE
   )
   on.exit(
