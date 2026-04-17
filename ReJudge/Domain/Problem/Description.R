@@ -7,12 +7,12 @@ source("ReJudge/Dom/Element/Text.R")
 
 problem.description <- function(engine) {
   dom <- dom(engine)
-  txt <- element.text(dom, separator = "\n")
+  text <- element.text(dom, separator = "\n")
   function(page) {
     text.join(
       "\n",
       collection.map(
-        txt,
+        text,
         collection.takeuntil(
           function(e) dom$matches("div#ej-submit-tabs", e),
           collection.filter(

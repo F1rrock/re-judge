@@ -1,4 +1,3 @@
-source("ReJudge/Text/Plain.R")
 source("ReJudge/Text/Regex.R")
 source("ReJudge/Text/Payload.R")
 
