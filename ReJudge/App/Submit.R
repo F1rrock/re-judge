@@ -206,5 +206,12 @@ app.submit <- app.delegate(function() {
       }
     )
   })
-  app.console(report)
+  app.console(
+    text.required(
+      "unexpected report structure",
+      text.nonempty(
+        report
+      )
+    )
+  )
 })
