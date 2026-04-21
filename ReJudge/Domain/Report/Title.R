@@ -1,23 +1,22 @@
 source("ReJudge/Text/Join.R")
 source("ReJudge/Dom/Engine/Engine.R")
-source("ReJudge/Dom/Element/Table.R")
 source("ReJudge/Dom/Element/Text.R")
 source("ReJudge/Collection/Map.R")
 source("ReJudge/Collection/Take.R")
 source("ReJudge/Collection/DropUntil.R")
 
-solution.report <- function(engine) {
+report.title <- function(engine) {
   dom <- dom(engine)
-  table <- element.table(dom)
+  text <- element.text(dom)
   function(page) {
     text.join(
       "\n",
       collection.map(
-        table,
+        text,
         collection.take(
           1,
           collection.dropuntil(
-            function(e) dom$matches("table", e),
+            function(e) dom$matches("h2", e),
             dom$children(
               dom$selection(
                 "div.l14", 
