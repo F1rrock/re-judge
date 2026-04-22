@@ -1,0 +1,5 @@
+source("Src/Domain/Problem/Manifest.R")
+source("Src/Domain/Token/Manifest.R")
+source("Src/Domain/Submission/Manifest.R")
+source("Src/Domain/Run/Manifest.R")
+source("Src/Domain/Report/Manifest.R")

@@ -1,0 +1,6 @@
+source("Src/Domain/Problem/Id.R")
+source("Src/Domain/Problem/Description.R")
+source("Src/Domain/Problem/Example.R")
+source("Src/Domain/Problem/Examples.R")
+source("Src/Domain/Problem/Language.R")
+source("Src/Domain/Problem/Languages.R")

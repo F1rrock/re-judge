@@ -1,0 +1,6 @@
+source("Src/Http/Attachment/Manifest.R")
+source("Src/Http/Connection/Manifest.R")
+source("Src/Http/Driver/Manifest.R")
+source("Src/Http/Httr/Manifest.R")
+source("Src/Http/Media/Manifest.R")
+source("Src/Http/Request/Manifest.R")

@@ -1,0 +1,8 @@
+source("Src/App/App.R")
+source("Src/App/Delegate.R")
+source("Src/App/Console.R")
+source("Src/App/Problem.R")
+source("Src/App/Problems.R")
+source("Src/App/Submit.R")
+source("Src/App/Testification.R")
+source("Src/App/Debug.R")
