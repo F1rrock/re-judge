@@ -8,6 +8,11 @@ Description: Show the ejudge problem for the current file
 Binding: problem
 Interactive: false
 
+Name: Local testing
+Description: Local testing via sample test
+Binding: testification
+Interactive: false
+
 Name: Submit the solution
 Description: Submit current file as ejudge solution
 Binding: submit
