@@ -1,5 +1,0 @@
-source("ReJudge/Session/Ejudge.R")
-source("ReJudge/Session/Fake.R")
-source("ReJudge/Session/Logged.R")
-source("ReJudge/Session/Session.R")
-source("ReJudge/Session/Presets/Manifest.R")

@@ -1,3 +1,0 @@
-source("ReJudge/Status/Always.R")
-
-run.undefined <- status.always(TRUE)

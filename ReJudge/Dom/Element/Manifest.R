@@ -1,7 +1,0 @@
-source("ReJudge/Dom/Element/Element.R")
-source("ReJudge/Dom/Element/Lambda.R")
-source("ReJudge/Dom/Element/Delegate.R")
-source("ReJudge/Dom/Element/Required.R")
-source("ReJudge/Dom/Element/First.R")
-source("ReJudge/Dom/Element/Text.R")
-source("ReJudge/Dom/Element/Table.R")

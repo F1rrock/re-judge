@@ -1,5 +1,0 @@
-source("ReJudge/Status/Status.R")
-source("ReJudge/Status/Always.R")
-source("ReJudge/Status/Logged.R")
-source("ReJudge/Status/First.R")
-source("ReJudge/Status/Delegate.R")

@@ -1,5 +1,0 @@
-source("ReJudge/Domain/Problem/Manifest.R")
-source("ReJudge/Domain/Token/Manifest.R")
-source("ReJudge/Domain/Submission/Manifest.R")
-source("ReJudge/Domain/Run/Manifest.R")
-source("ReJudge/Domain/Report/Manifest.R")
