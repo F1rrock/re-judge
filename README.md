@@ -74,7 +74,7 @@ Solutions are plain R scripts. Each file must contain a comment identifying the 
 Optionally, if the problem's language is not selected by default, add a second comment with the serial number of the language as it appears in the submission selector:
 
 ```r
-# default language: 15
+# language: 15
 ```
 
 Use `scan()` for reading input — it works in RStudio interactive mode and on ejudge:

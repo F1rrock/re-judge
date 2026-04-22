@@ -53,7 +53,7 @@ Every file must contain a comment with the problem name. This is how the addins 
 Optionally, if the language for the problem is not selected automatically, add a second comment with the serial number of the language as it appears in the submission language selector (1-based):
 
 ```r
-# default language: 15
+# language: 15
 ```
 
 ReJudge first tries to read the language from the problem page. If no language is pre-selected there, it falls back to `# default language`.
