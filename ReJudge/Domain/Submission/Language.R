@@ -9,7 +9,7 @@ source("ReJudge/Collection/Filter.R")
 submission.language <- function(file) {
   number.str(
     text.required(
-      "expected line like '# default language: <serial number in selector>'",
+      "expected line like '# language: <serial number in selector>'",
       text.first(
         NA_character_,
         collection.filter(
@@ -17,7 +17,7 @@ submission.language <- function(file) {
           collection.map(
             function(l) {
               text.regex(
-                "^# default language: \\s*([0-9]*)\\s*$",
+                "^# language: \\s*([0-9]*)\\s*$",
                 l
               )
             },
