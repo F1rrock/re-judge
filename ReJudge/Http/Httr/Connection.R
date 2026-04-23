@@ -1,0 +1,49 @@
+source("ReJudge/Text/Text.R")
+source("ReJudge/Http/Media/Media.R")
+source("ReJudge/Http/Connection/Connection.R")
+
+httr.connection <- function(method, url, headers, body, jar, encode) {
+  structure(
+    list(
+      method  = method,
+      url     = url,
+      headers = headers,
+      body    = body,
+      jar     = jar,
+      encode  = encode
+    ),
+    class = "httr_connection"
+  )
+}
+
+response.httr_connection <- function(x) {
+  r <- httr::VERB(
+    verb   = contents(x$method), 
+    url    = contents(x$url), 
+    body   = data(x$body),
+    httr::add_headers(.headers = data(x$headers)), 
+    httr::set_cookies(.cookies = data(x$jar)),
+    encode = contents(x$encode)
+  )
+  list(
+    payload = function() httr::content(r, "text", encoding = "UTF-8"),
+    cookies = function() {
+      cs <- httr::cookies(r)
+      lapply(
+        seq_len(nrow(cs)),
+        function(i) {
+          list(
+            domain = cs$domain[[i]],
+            flag = cs$flag[[i]],
+            path = cs$path[[i]],
+            secure = cs$secure[[i]],
+            expiration = cs$expiration[[i]],
+            name = cs$name[[i]],
+            value = cs$value[[i]]
+          )
+        }
+      )
+    },
+    status  = function() httr::status_code(r)
+  )
+}

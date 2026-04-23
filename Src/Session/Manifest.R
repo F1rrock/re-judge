@@ -1,5 +1,0 @@
-source("Src/Session/Ejudge.R")
-source("Src/Session/Fake.R")
-source("Src/Session/Logged.R")
-source("Src/Session/Session.R")
-source("Src/Session/Presets/Manifest.R")

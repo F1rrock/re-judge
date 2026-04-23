@@ -1,0 +1,8 @@
+source("ReJudge/App/App.R")
+source("ReJudge/App/Delegate.R")
+source("ReJudge/App/Console.R")
+source("ReJudge/App/Problem.R")
+source("ReJudge/App/Problems.R")
+source("ReJudge/App/Submit.R")
+source("ReJudge/App/Testification.R")
+source("ReJudge/App/Debug.R")

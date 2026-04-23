@@ -1,8 +1,0 @@
-source("Src/Http/Connection/Connection.R")
-source("Src/Http/Connection/Fake.R")
-source("Src/Http/Connection/Logged.R")
-source("Src/Http/Connection/Memo.R")
-source("Src/Http/Connection/Retried.R")
-source("Src/Http/Connection/Successful.R")
-source("Src/Http/Connection/Timed.R")
-source("Src/Http/Connection/Presets/Manifest.R")
