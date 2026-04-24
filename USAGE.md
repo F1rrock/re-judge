@@ -62,7 +62,7 @@ Optionally, if the language for the problem is not selected automatically, add a
 # language: 15
 ```
 
-ReJudge first tries to read the language from the problem page. If no language is pre-selected there, it falls back to `# default language`.
+ReJudge first tries to read the language from the problem page. If no language is pre-selected there, it falls back to `# language`.
 
 ### Reading input
 
@@ -89,6 +89,10 @@ Lists all problems available in the contest. Use this to discover problem names 
 ### Description of the problem
 
 Fetches and displays the problem statement. The currently open file must contain a problem comment (e.g. `# problem: A3`).
+
+### Local testing
+
+Tests that submission passes sample test from ejudge problem description. The currently open file must contain a problem comment (e.g. `# problem: A3`).
 
 ### Submit the solution
 
