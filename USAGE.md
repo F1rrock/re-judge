@@ -12,11 +12,17 @@ install.packages(c("httr", "xml2", "rvest", "jsonlite", "rstudioapi"))
 
 ## Installation
 
-Install the addin package from the `RePackage/` directory inside the project:
+To install the addins package, open the `RePackage/Installation/` directory in the repository on GitHub and choose a suitable installation script.
 
-```r
-devtools::install("RePackage")
-```
+Copy the script and run it in the R console in RStudio.
+
+This will:
+
+- download the project into the current working directory,
+- install the `RePackage` package,
+- register the addins in RStudio.
+
+After installation, you only need to configure the `.env` file.
 
 Restart RStudio. The addins will appear in the **Addins** menu.
 
@@ -25,11 +31,11 @@ Restart RStudio. The addins will appear in the **Addins** menu.
 Create a `.env` file in your project root based on `.env.example`:
 
 ```env
-LOGIN=your_login
-PASSWORD=your_password
-CONTEST_ID=1
-BASE_URL=http://0.0.0.0:90
-CLIENT_PATH=/ejudge
+LOGIN={LOGIN}
+PASSWORD={PASSWORD}
+CONTEST_ID=91
+BASE_URL=http://10.21.17.68
+CLIENT_PATH=new-client
 ```
 
 | Variable | Description |
