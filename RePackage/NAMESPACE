@@ -12,6 +12,7 @@ importFrom(jsonlite, fromJSON)
 
 export(problem)
 export(problems)
+export(submissions)
 export(solved)
 export(submit)
 export(testification)

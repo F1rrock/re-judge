@@ -3,14 +3,19 @@ Description: Show available problem names for the current contest
 Binding: problems
 Interactive: false
 
+Name: Solved problems
+Description: View solved problems
+Binding: solved
+Interactive: false
+
 Name: Description of the problem
 Description: Show the ejudge problem for the current file
 Binding: problem
 Interactive: false
 
-Name: Solved problems
-Description: View solved problems
-Binding: solved
+Name: Previous solutions of this problem
+Description: View previous solutions of the problem for the current file
+Binding: submissions
 Interactive: false
 
 Name: Local testing
