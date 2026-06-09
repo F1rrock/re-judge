@@ -8,6 +8,11 @@ Description: Show the ejudge problem for the current file
 Binding: problem
 Interactive: false
 
+Name: Solved problems
+Description: View solved problems
+Binding: solved
+Interactive: false
+
 Name: Local testing
 Description: Local testing via sample test
 Binding: testification
