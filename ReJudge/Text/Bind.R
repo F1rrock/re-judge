@@ -12,6 +12,7 @@ text.bind <- function(l, r) {
 
 contents.text_bind <- function(x) {
   left <- contents(x$left)
+  if (is.na(left)) return(left)
   contents(
     x$right(
       left
