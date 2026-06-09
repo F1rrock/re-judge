@@ -12,12 +12,15 @@ problems.solved <- function(engine) {
         function(e) dom$selection("a.tab", e),
         collection.filter(
           function(e) dom$matches("div.nProbOk", e),
-          dom$children(
-            dom$selection(
-              "ul.nTopNavList",
+          collection.map(
+            function(e) dom$selection("div", e),
+            dom$children(
               dom$selection(
-                "tr#probNavTopList", 
-                dom$root(page)
+                "ul.nTopNavList",
+                dom$selection(
+                  "tr#probNavTopList", 
+                  dom$root(page)
+                )
               )
             )
           )
