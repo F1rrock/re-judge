@@ -1,7 +1,8 @@
 source("ReJudge/Session/Ejudge.R")
 source("ReJudge/Session/Presets/Ready.R")
 source("ReJudge/Http/Httr/Driver.R")
-source("ReJudge/Text/Required.R")
+source("ReJudge/Text/Default.R")
+source("ReJudge/Text/Bind.R")
 source("ReJudge/Text/NonEmpty.R")
 source("ReJudge/Text/Join.R")
 source("ReJudge/Text/Presets/Variable.R")
@@ -35,10 +36,9 @@ app.solved <- app.delegate(function() {
   )
   solved <- problems.solved(engine.xml2)
   app.console(
-    text.fstring(
-      "Solved problems:\n%s",
-      text.required(
-        "There is no solved problems :(\n",
+    text.default(
+      fallback = "There is no solved problems :(\n",
+      origin = text.bind(
         text.nonempty(
           text.join(
             ", ",
@@ -48,7 +48,8 @@ app.solved <- app.delegate(function() {
               )
             )
           )
-        )
+        ),
+        function(s) text.fstring("Solved problems:\n%s", s)
       )
     )
   )
