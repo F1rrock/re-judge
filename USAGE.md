@@ -98,6 +98,10 @@ Fetches and displays the problem statement. The currently open file must contain
 
 Fetches and displays table of previous solutions for the current problem. The currently open file must contain a problem comment (e.g. `# problem: A3`).
 
+### Last retport of the problem
+
+Fetches and displays last report for the current problem. The currently open file must contain a problem comment (e.g. `# problem: A3`).
+
 ### Local testing
 
 Tests that submission passes sample test from ejudge problem description. The currently open file must contain a problem comment (e.g. `# problem: A3`).
