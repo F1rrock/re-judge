@@ -18,6 +18,11 @@ Description: View previous solutions of the problem for the current file
 Binding: submissions
 Interactive: false
 
+Name: Last report
+Description: View last report of the problem for the current file
+Binding: lastreport
+Interactive: false
+
 Name: Local testing
 Description: Local testing via sample test
 Binding: testification
