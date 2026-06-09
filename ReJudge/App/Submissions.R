@@ -47,7 +47,7 @@ app.submissions <- app.delegate(function() {
   )
   app.console(
     text.default(
-      fallback = "there is no submissions for this problem",
+      fallback = "there is no submissions for this problem :(",
       origin = text.nonempty(
         submissions(
           page(
