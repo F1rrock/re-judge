@@ -86,6 +86,10 @@ line <- readline(file = "stdin")
 
 Lists all problems available in the contest. Use this to discover problem names without opening ejudge manually. This addin does not require a problem comment in the current file.
 
+### Solved problems
+
+Lists all solved problems in the contest. Use this to discover names of solved problems without opening ejudge manually. This addin does not require a problem comment in the current file.
+
 ### Description of the problem
 
 Fetches and displays the problem statement. The currently open file must contain a problem comment (e.g. `# problem: A3`).
