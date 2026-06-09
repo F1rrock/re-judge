@@ -94,6 +94,10 @@ Lists all solved problems in the contest. Use this to discover names of solved p
 
 Fetches and displays the problem statement. The currently open file must contain a problem comment (e.g. `# problem: A3`).
 
+### Previous solutions of the problem
+
+Fetches and displays table of previous solutions for the current problem. The currently open file must contain a problem comment (e.g. `# problem: A3`).
+
 ### Local testing
 
 Tests that submission passes sample test from ejudge problem description. The currently open file must contain a problem comment (e.g. `# problem: A3`).
