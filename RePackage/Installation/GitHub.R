@@ -1,3 +1,9 @@
+url <- "http://0.0.0.0:90"
+client <- "ejudge"
+contest <- "1"
+login <- "vader"
+pass <- "ejudge"
+
 old_options <- options(
   pkgType = "binary",
   install.packages.compile.from.source = "never"
@@ -59,6 +65,26 @@ root <- list.dirs(tmp, recursive = FALSE, full.names = TRUE)[[1]]
 
 files <- list.files(root, all.files = TRUE, no.. = TRUE, full.names = TRUE)
 file.copy(from = files, to = ".", recursive = TRUE, overwrite = TRUE)
+
+env_escape <- function(x) {
+  x <- as.character(x)
+  x <- gsub("\\\\", "\\\\\\\\", x)
+  x <- gsub("\"", "\\\\\"", x)
+  paste0("\"", x, "\"")
+}
+
+env_path <- file.path(getwd(), ".env")
+
+writeLines(
+  c(
+    paste0("LOGIN=", env_escape(login)),
+    paste0("PASSWORD=", env_escape(pass)),
+    paste0("CONTEST_ID", env_escape(contest)),
+    paste0("BASE_URL=", env_escape(url)),
+    paste0("CLIENT_PATH=", env_escape(client))
+  ),
+  env_path
+)
 
 pkg_path <- normalizePath(
   file.path(getwd(), "RePackage"),
@@ -122,4 +148,5 @@ if (!requireNamespace("ReJudge", quietly = TRUE)) {
 
 rstudioapi::writeRStudioPreference("show_hidden_files", TRUE)
 
+message(".env created.")
 message("ReJudge installed.")
