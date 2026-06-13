@@ -11,7 +11,7 @@ rejudge.project.file <- function(path) {
     basename(normalizePath(path, winslash = "/", mustWork = TRUE)),
     ".Rproj"
   )
-  file <- file.path(path, project_name)
+  file <- file.path(path, name)
   writeLines(
     c(
       "Version: 1.0",
