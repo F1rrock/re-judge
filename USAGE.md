@@ -56,10 +56,10 @@ Every file must contain a comment with the problem name. This is how the addins 
 # problem: A3
 ```
 
-Optionally, if the language for the problem is not selected automatically, add a second comment with the serial number of the language as it appears in the submission language selector (1-based):
+Optionally, if the programming language is not selected automatically, add a second comment with the language number from the submission page dropdown. Numbering starts from 1.
 
 ```r
-# language: 15
+# language: 3
 ```
 
 ReJudge first tries to read the language from the problem page. If no language is pre-selected there, it falls back to `# language`.
