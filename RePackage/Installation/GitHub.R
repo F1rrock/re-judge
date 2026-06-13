@@ -50,10 +50,10 @@ if (dir.exists(old_pkg)) {
   unlink(old_pkg, recursive = TRUE, force = TRUE)
 }
 
-url <- "https://github.com/F1rrock/re-judge/archive/refs/heads/main.zip"
+src <- "https://github.com/F1rrock/re-judge/archive/refs/heads/main.zip"
 
 zip <- tempfile(fileext = ".zip")
-download.file(url, zip, mode = "wb")
+download.file(src, zip, mode = "wb")
 
 tmp <- file.path(tempdir(), "re-judge-setup")
 unlink(tmp, recursive = TRUE, force = TRUE)
@@ -79,7 +79,7 @@ writeLines(
   c(
     paste0("LOGIN=", env_escape(login)),
     paste0("PASSWORD=", env_escape(pass)),
-    paste0("CONTEST_ID", env_escape(contest)),
+    paste0("CONTEST_ID=", env_escape(contest)),
     paste0("BASE_URL=", env_escape(url)),
     paste0("CLIENT_PATH=", env_escape(client))
   ),
