@@ -8,12 +8,12 @@ script.r <- function(path, input) {
 result.script_r <- function(x) {
   path  <- contents(x$path)
   input <- contents(x$input)
-  ReJudge   <- readLines(path, warn = FALSE)
-  if (!any(grepl('file\\s*=\\s*"stdin"', ReJudge))) {
+  rejudge   <- readLines(path, warn = FALSE)
+  if (!any(grepl('file\\s*=\\s*"stdin"', rejudge))) {
     tmp <- tempfile(fileext = ".R")
     on.exit(unlink(tmp))
     writeLines(
-      c('scan <- function(...) base::scan(file = "stdin", ...)', ReJudge),
+      c('scan <- function(...) base::scan(file = "stdin", ...)', rejudge),
       tmp
     )
     path <- tmp
