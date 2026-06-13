@@ -1,5 +1,9 @@
-options(pkgType = "binary")
-options(install.packages.compile.from.source = "never")
+old_options <- options(
+  pkgType = "binary",
+  install.packages.compile.from.source = "never"
+)
+
+on.exit(options(old_options), add = TRUE)
 
 deps <- c("dotenv", "httr", "xml2", "rvest", "jsonlite", "rstudioapi")
 
@@ -12,6 +16,17 @@ if (length(missing_deps) > 0) {
     missing_deps,
     repos = "https://cran.rstudio.com",
     type = "binary"
+  )
+}
+
+failed_deps <- deps[
+  !vapply(deps, requireNamespace, logical(1), quietly = TRUE)
+]
+
+if (length(failed_deps) > 0) {
+  stop(
+    "Failed to install required dependencies: ",
+    paste(failed_deps, collapse = ", ")
   )
 }
 
