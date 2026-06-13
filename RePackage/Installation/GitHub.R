@@ -149,7 +149,6 @@ if (!requireNamespace("ReJudge", quietly = TRUE)) {
 rstudioapi::writeRStudioPreference("show_hidden_files", TRUE)
 
 if (rstudioapi::isAvailable()) {
-  rstudioapi::navigateToFile(file.path(getwd(), "USAGE.md"))
   rstudioapi::filesPaneNavigate(normalizePath(getwd(), winslash = "/", mustWork = TRUE))
 }
 
