@@ -6,10 +6,6 @@
 - RStudio
 - Packages: `httr`, `xml2`, `rvest`, `jsonlite`, `rstudioapi`
 
-```r
-install.packages(c("httr", "xml2", "rvest", "jsonlite", "rstudioapi"))
-```
-
 ## Installation
 
 To install the addins package, open the `RePackage/Installation/` directory in the repository on GitHub and choose a suitable installation script.
@@ -22,7 +18,7 @@ This will:
 - install the `RePackage` package,
 - register the addins in RStudio.
 
-After installation, you only need to configure the `.env` file.
+After installation, you only need to configure the `.env` file (or just use pre-create installer).
 
 Restart RStudio. The addins will appear in the **Addins** menu.
 
@@ -74,11 +70,7 @@ x <- scan(quiet = TRUE)
 cat(x[1] + x[2])
 ```
 
-If you use `readline()` or `readLines()`, always pass `file = "stdin"` explicitly:
-
-```r
-line <- readline(file = "stdin")
-```
+Do not you use `readline()` or `readLines()` functions, use `scan()` only
 
 ## Addins
 
@@ -112,9 +104,13 @@ Submits the currently open file to ejudge and waits for the verdict. The result 
 
 ## Workflow
 
-1. Open **Addins → Available problems** to see the list of problems in the contest
-2. Create a solution file, add a comment with the chosen problem name (e.g. `# problem: M5`)
-3. Open **Addins → Description of the problem** to read the problem statement
-4. Write your solution
-5. Open **Addins → Submit the solution** to submit
-6. Go to step 4 if the verdict requires changes
+1. Open **Addins → Solved problems** to see the list of problems that already solved
+2. Open **Addins → Available problems** to see the list of problems in the contest
+3. Create a solution file, add a comment with the unsolved problem name (e.g. `# problem: M5`)
+4. Open **Addins → Description of the problem** to read the problem statement
+5. Open **Addins → Previous solutions of this problem** to find out errors of previous solutions
+6. Open **Addins → Last report** to see details of last report
+7. Write your solution
+8. Open **Addins → Local testing** to run code with basic test
+9. Open **Addins → Submit the solution** to submit
+10. Go to step 4 if the verdict requires changes
