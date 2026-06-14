@@ -149,6 +149,7 @@ if (!requireNamespace("ReJudge", quietly = TRUE)) {
 rstudioapi::writeRStudioPreference("show_hidden_files", TRUE)
 
 if (rstudioapi::isAvailable()) {
+  rstudioapi::navigateToFile(file.path(getwd(), "Src/HelloWorld.R"))
   rstudioapi::filesPaneNavigate(normalizePath(getwd(), winslash = "/", mustWork = TRUE))
 }
 
