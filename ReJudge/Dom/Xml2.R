@@ -27,7 +27,7 @@ dom.xml2_engine <- function(x) {
     },
     children = function(element) {
       collection.lambda(function() {
-        xs <- xml2::xml_children(node(element))
+        xs <- xml2::xml_contents(node(element))
         lapply(
           seq_along(xs),
           function(i) {
