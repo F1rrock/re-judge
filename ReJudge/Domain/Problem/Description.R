@@ -1,3 +1,7 @@
+source("ReJudge/Text/Default.R")
+source("ReJudge/Text/Bind.R")
+source("ReJudge/Text/Fstring.R")
+source("ReJudge/Text/Empty.R")
 source("ReJudge/Text/Join.R")
 source("ReJudge/Collection/Map.R")
 source("ReJudge/Collection/TakeUntil.R")
@@ -12,7 +16,22 @@ problem.description <- function(engine) {
     text.join(
       "\n",
       collection.map(
-        text,
+        function(e) {
+          text.fstring(
+            "%s%s",
+            text(e), 
+            text.default(
+              fallback = text.empty,
+              origin = text.bind(
+                dom$attr(
+                  "href", 
+                  dom$selection("[href]", e)
+                ), 
+                function(x) text.fstring("[%s]", x)
+              )
+            )
+          )
+        },
         collection.takeuntil(
           function(e) dom$matches("div#ej-submit-tabs", e),
           collection.filter(
