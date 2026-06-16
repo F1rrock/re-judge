@@ -30,5 +30,10 @@ Interactive: false
 
 Name: Submit the solution
 Description: Submit current file as ejudge solution
+Binding: autosubmit
+Interactive: false
+
+Name: Submit with pre-test
+Description: Submit current file with local pre-test
 Binding: submit
 Interactive: false
