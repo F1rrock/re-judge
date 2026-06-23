@@ -18,16 +18,28 @@ problem.description <- function(engine) {
       collection.map(
         function(e) {
           text.fstring(
-            "%s%s",
+            "%s%s%s",
             text(e), 
             text.default(
               fallback = text.empty,
               origin = text.bind(
-                dom$attr(
-                  "href", 
-                  dom$selection("[href]", e)
-                ), 
+                dom$attr("href", e), 
                 function(x) text.fstring("[%s]", x)
+              )
+            ),
+            text.join(
+              "",
+              collection.map(
+                function(e) {
+                  text.default(
+                    fallback = text.empty,
+                    origin = text.bind(
+                      dom$attr("href", e), 
+                      function(x) text.fstring("[%s]", x)
+                    )
+                  )
+                },
+                dom$selections("[href]", e)
               )
             )
           )
