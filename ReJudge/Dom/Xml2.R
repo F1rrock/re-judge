@@ -25,6 +25,17 @@ dom.xml2_engine <- function(x) {
         )
       })
     },
+    selections = function(selector, element) {
+      collection.lambda(function() {
+        n <- node(element)
+        if (!identical(xml2::xml_type(n), "element")) return(list())
+        xs <- rvest::html_elements(n, css = contents(selector))
+        Map(function(i) {
+          force(i)
+          element.lambda(function() xs[[i]])
+        }, seq_along(xs))
+      })
+    },
     children = function(element) {
       collection.lambda(function() {
         xs <- xml2::xml_contents(node(element))
