@@ -38,10 +38,13 @@ problem.description <- function(engine) {
             function(e) !(dom$matches("table.line-table-wb", e)),
             collection.filter(
               function(e) !(dom$matches("style", e)),
-              dom$children(
-                dom$selection(
-                  "div#probNavTaskArea-ins", 
-                  dom$root(page)
+              collection.filter(
+                function(e) !(dom$matches("br", e)),
+                dom$children(
+                  dom$selection(
+                    "div#probNavTaskArea-ins", 
+                    dom$root(page)
+                  )
                 )
               )
             )
