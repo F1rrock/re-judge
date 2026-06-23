@@ -1,5 +1,5 @@
 path <- function(x) UseMethod("path")
-ReJudge  <- function(x) UseMethod("ReJudge")
+src  <- function(x) UseMethod("src")
 
 path.default <- function(x) {
   stop(
@@ -10,10 +10,10 @@ path.default <- function(x) {
   )
 }
 
-ReJudge.default <- function(x) {
+src.default <- function(x) {
   stop(
     sprintf(
-      "ReJudge() is not implemented for %s",
+      "src() is not implemented for %s",
       paste(class(x), collapse = "/")
     )
   )

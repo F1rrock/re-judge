@@ -19,8 +19,8 @@ path.file_required <- function(x) {
   p
 }
 
-ReJudge.file_required <- function(x) {
-  s <- ReJudge(x$origin)
+src.file_required <- function(x) {
+  s <- src(x$origin)
   if (is.na(s)) {
     stop(contents(x$onerror))
   }

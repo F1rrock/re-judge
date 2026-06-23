@@ -23,6 +23,6 @@ path.file_r <- function(x) {
   NA_character_
 }
 
-ReJudge.file_r  <- function(x) {
-  ReJudge(x$origin)
+src.file_r  <- function(x) {
+  src(x$origin)
 }
