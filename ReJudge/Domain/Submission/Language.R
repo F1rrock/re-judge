@@ -24,7 +24,7 @@ submission.language <- function(file) {
             collection.lines(
               text.lambda(
                 function() {
-                  ReJudge(
+                  src(
                     file.required(
                       "required submission file path is not defined",
                       file

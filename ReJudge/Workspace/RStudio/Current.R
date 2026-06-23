@@ -12,7 +12,7 @@ path.rstudio_current <- function(x) {
   path
 }
 
-ReJudge.rstudio_current <- function(x) {
+src.rstudio_current <- function(x) {
   paste(
     readLines(path(x), warn = FALSE, encoding = "UTF-8"),
     collapse = "\n"
