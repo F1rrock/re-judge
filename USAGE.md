@@ -2,9 +2,9 @@
 
 ## Prerequisites
 
-- R (≥ 4.0)
+- R 4.0 or newer
 - RStudio
-- Packages: `httr`, `xml2`, `rvest`, `jsonlite`, `rstudioapi`
+- Required R packages: `httr`, `xml2`, `rvest`, `jsonlite`, `rstudioapi`
 
 ## Installation
 
@@ -12,19 +12,19 @@ To install the addins package, open the `RePackage/Installation/` directory in t
 
 Copy the script and run it in the R console in RStudio.
 
-This will:
+The installer will:
 
-- download the project into the current working directory,
-- install the `RePackage` package,
-- register the addins in RStudio.
+- download the project into the current working directory;
+- install the `RePackage` package;
+- register the RStudio addins.
 
-After installation, you only need to configure the `.env` file (or just use pre-create installer).
+After installation, configure the `.env` file. Some installers may create it automatically.
 
 Restart RStudio. The addins will appear in the **Addins** menu.
 
 ## Configuration
 
-Create a `.env` file in your project root based on `.env.example`:
+Create a `.env` file in the project root based on `.env.example`:
 
 ```env
 LOGIN={LOGIN}
@@ -40,13 +40,13 @@ CLIENT_PATH=new-client
 | `PASSWORD` | Your ejudge password |
 | `CONTEST_ID` | Contest number |
 | `BASE_URL` | ejudge server URL |
-| `CLIENT_PATH` | Web client path (`/ejudge` or `/new-client`) |
+| `CLIENT_PATH` | Web client path, for example `ejudge` or `new-client` |
 
 ## Writing a solution
 
-You can place your solution file anywhere and name it however you like. Keeping solutions in `Src/` is preferred for consistency.
+You can place your solution file anywhere and name it however you like. Keeping solutions in `Src/` is recommended for consistency.
 
-Every file must contain a comment with the problem name. This is how the addins identify which problem you are working on:
+Every solution file must contain a comment with the problem name. This is how ReJudge identifies which problem you are working on:
 
 ```r
 # problem: A3
@@ -58,11 +58,11 @@ Optionally, if the programming language is not selected automatically, add a sec
 # language: 3
 ```
 
-ReJudge first tries to read the language from the problem page. If no language is pre-selected there, it falls back to `# language`.
+ReJudge first tries to read the language from the problem page. If no language is pre-selected there, it falls back to the `# language` comment.
 
 ### Reading input
 
-Use `scan()` to read numbers:
+Use `scan()` to read input:
 
 ```r
 # problem: A
@@ -70,47 +70,57 @@ x <- scan(quiet = TRUE)
 cat(x[1] + x[2])
 ```
 
-Do not you use `readline()` or `readLines()` functions, use `scan()` only
+Do not use `readline()` or `readLines()` for contest input. Use `scan()` instead.
 
 ## Addins
 
 ### Available problems
 
-Lists all problems available in the contest. Use this to discover problem names without opening ejudge manually. This addin does not require a problem comment in the current file.
+Lists all problems available in the contest. Use this addin to discover problem names without opening ejudge manually. This addin does not require a problem comment in the current file.
 
 ### Solved problems
 
-Lists all solved problems in the contest. Use this to discover names of solved problems without opening ejudge manually. This addin does not require a problem comment in the current file.
+Lists all solved problems in the contest. Use this addin to discover already solved problem names without opening ejudge manually. This addin does not require a problem comment in the current file.
 
 ### Description of the problem
 
-Fetches and displays the problem statement. The currently open file must contain a problem comment (e.g. `# problem: A3`).
+Fetches and displays the problem statement. The currently open file must contain a problem comment, for example:
+
+```r
+# problem: A3
+```
 
 ### Previous solutions of the problem
 
-Fetches and displays table of previous solutions for the current problem. The currently open file must contain a problem comment (e.g. `# problem: A3`).
+Fetches and displays a table of previous submissions for the current problem. The currently open file must contain a problem comment.
 
-### Last report of the problem
+### Last report
 
-Fetches and displays last report for the current problem. The currently open file must contain a problem comment (e.g. `# problem: A3`).
+Fetches and displays the last report for the current problem. The currently open file must contain a problem comment.
 
 ### Local testing
 
-Tests that submission passes sample test from ejudge problem description. The currently open file must contain a problem comment (e.g. `# problem: A3`).
+Runs the currently open solution against sample tests from the ejudge problem statement. If the statement contains downloadable resources, ReJudge downloads them before running the local test. The currently open file must contain a problem comment.
 
 ### Submit the solution
 
-Submits the currently open file to ejudge and waits for the verdict. The result table is printed in the console when testing completes. The currently open file must contain a problem comment (e.g. `# problem: A3`).
+Submits the currently open file to ejudge and waits for the verdict. The result table is printed in the console when testing completes. The currently open file must contain a problem comment.
+
+### Submit with pre-test
+
+Runs the currently open file against the sample tests first. If all sample tests pass, ReJudge submits the solution to ejudge and waits for the verdict. The result table is printed in the console when testing completes. The currently open file must contain a problem comment.
+
+Use this addin when local sample tests are available. If local testing is not applicable for the problem, use **Submit the solution** instead.
 
 ## Workflow
 
-1. Open **Addins → Solved problems** to see the list of problems that already solved
-2. Open **Addins → Available problems** to see the list of problems in the contest
-3. Create a solution file, add a comment with the unsolved problem name (e.g. `# problem: M5`)
-4. Open **Addins → Description of the problem** to read the problem statement
-5. Open **Addins → Previous solutions of this problem** to find out errors of previous solutions
-6. Open **Addins → Last report** to see details of last report
-7. Write your solution
-8. Open **Addins → Local testing** to run code with basic test
-9. Open **Addins → Submit the solution** to submit
-10. Go to step 4 if the verdict requires changes
+1. Open **Addins → Solved problems** to see the list of already solved problems.
+2. Open **Addins → Available problems** to see the list of problems in the contest.
+3. Create a solution file and add a problem comment, for example `# problem: M5`.
+4. Open **Addins → Description of the problem** to read the problem statement.
+5. Open **Addins → Previous solutions of the problem** to inspect previous submissions.
+6. Open **Addins → Last report** to see the details of the latest report.
+7. Write your solution.
+8. Open **Addins → Local testing** to run the solution against sample tests.
+9. Open **Addins → Submit with pre-test** to test locally and submit automatically, or **Addins → Submit the solution** to submit without local pre-testing.
+10. If the verdict requires changes, return to step 4 or step 7.
