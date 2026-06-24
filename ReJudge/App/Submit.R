@@ -15,9 +15,13 @@ source("ReJudge/Number/Str.R")
 source("ReJudge/Spec/Spec.R")
 source("ReJudge/Collection/Map.R")
 source("ReJudge/Collection/Drop.R")
+source("ReJudge/Resource/Url.R")
 source("ReJudge/File/RFile.R")
+source("ReJudge/File/Url.R")
+source("ReJudge/File/Name.R")
 source("ReJudge/File/Required.R")
 source("ReJudge/Script/RScript.R")
+source("ReJudge/Script/WithResources.R")
 source("ReJudge/Page/Submit.R")
 source("ReJudge/Page/Status.R")
 source("ReJudge/Page/Main.R")
@@ -28,11 +32,12 @@ source("ReJudge/Session/Presets/Ready.R")
 source("ReJudge/Json/JsonLite.R")
 source("ReJudge/Dom/Xml2.R")
 source("ReJudge/Http/Httr/Driver.R")
-source("ReJudge/Workspace/Rstudio/Current.R")
+source("ReJudge/Workspace/RStudio/Current.R")
 source("ReJudge/App/Delegate.R")
 source("ReJudge/App/Console.R")
 source("ReJudge/Domain/Problem/Id.R")
 source("ReJudge/Domain/Problem/Description.R")
+source("ReJudge/Domain/Problem/Attachments.R")
 source("ReJudge/Domain/Problem/Language.R")
 source("ReJudge/Domain/Problem/Languages.R")
 source("ReJudge/Domain/Problem/Examples.R")
@@ -66,7 +71,7 @@ app.submit <- app.delegate(function() {
     "expected current file with .R extension",
     file.r(rstudio.current)
   )
-  problem <- local({
+  id <- local({
     id <- problem.id(engine.xml2)
     main <- page.main(
       driver  = httr.driver, 
@@ -78,33 +83,25 @@ app.submit <- app.delegate(function() {
       submission.title(submission)
     )
   })
-  examples <- local({
-    description <- problem.description(engine.xml2)
+  problem <- local({
     page <- page.problem(
       driver = httr.driver,
       address,
       client
     )
+    page(session, id)
+  })
+  examples <- local({
+    description <- problem.description(engine.xml2)
     problem.examples(
       description(
-        page(
-          session,
-          problem
-        )
+        problem
       )
     )
   })
   language <- local({
     language <- problem.language(engine.xml2)
     languages <- problem.languages(engine.xml2)
-    page <- local({
-      page <- page.problem(
-        driver = httr.driver,
-        address,
-        client
-      )
-      page(session, problem)
-    })
     text.default(
       fallback = text.required(
         "can not identify problem's language",
@@ -117,18 +114,19 @@ app.submit <- app.delegate(function() {
               ),
               1
             ),
-            languages(page)
+            languages(problem)
           )
         )
       ),
       origin = text.nonempty(
-        language(page)
+        language(problem)
       )
     )
   })
   run <- local({
-    id <- run.id(engine.xml2)
-    page <- page.submit(
+    run <- run.id(engine.xml2)
+    attachments <- problem.attachments(engine.xml2)
+    submit <- page.submit(
       driver = httr.driver, 
       address,
       client
@@ -140,9 +138,22 @@ app.submit <- app.delegate(function() {
           function(example) {
             text.asserted(
               text.result(
-                script.r(
-                  submission.file(submission),
-                  input(example)
+                script.withresources(
+                  script.r(
+                    submission.file(submission),
+                    input(example)
+                  ),
+                  collection.map(
+                    function(x) {
+                      resource.url(
+                        x, 
+                        file.name(
+                          file.url(x)
+                        )
+                      )
+                    },
+                    attachments(problem)
+                  )
                 )
               ),
               output(example),
@@ -156,11 +167,11 @@ app.submit <- app.delegate(function() {
         text.green("sample tests passed"),
         text.required(
           "submission was not registered by ejudge",
-          id(
-            page(
+          run(
+            submit(
               session,
               lang = language,
-              problem,
+              id,
               file = submission.file(submission)
             )
           )
@@ -187,36 +198,36 @@ app.submit <- app.delegate(function() {
   report <- local({
     table <- report.table(engine.xml2)
     title <- report.title(engine.xml2)
-    page <- local({
-      page <- page.report(
-        driver = httr.driver,
-        address,
-        client
-      )
-      page(session, run)
-    })
-    text.default(
-      fallback = text.fstring(
-        "Result: %s",
-        text.required(
-          "unexpected report structure",
-          text.nonempty(
-            title(page)
+    text.bind(
+      run,
+      function(run) {
+        page <- local({
+          page <- page.report(
+            driver = httr.driver,
+            address,
+            client
           )
-        )
-      ),
-      origin = text.nonempty(
-        text.bind(
-          run,
-          function(run) {
+          page(session, run)
+        })
+        text.default(
+          fallback = text.fstring(
+            "Result: %s",
+            text.required(
+              "unexpected report structure",
+              text.nonempty(
+                title(page)
+              )
+            )
+          ),
+          origin = text.nonempty(
             report.pooling(
               status,
               downtime = 1,
               table(page)
             )
-          }
+          )
         )
-      )
+      }
     )
   })
   app.console(report)
