@@ -21,7 +21,7 @@ source("ReJudge/Session/Presets/Ready.R")
 source("ReJudge/Json/JsonLite.R")
 source("ReJudge/Dom/Xml2.R")
 source("ReJudge/Http/Httr/Driver.R")
-source("ReJudge/Workspace/Rstudio/Current.R")
+source("ReJudge/Workspace/RStudio/Current.R")
 source("ReJudge/App/Delegate.R")
 source("ReJudge/App/Console.R")
 source("ReJudge/Domain/Problem/Id.R")
@@ -140,36 +140,36 @@ app.autosubmit <- app.delegate(function() {
   report <- local({
     table <- report.table(engine.xml2)
     title <- report.title(engine.xml2)
-    page <- local({
-      page <- page.report(
-        driver = httr.driver,
-        address,
-        client
-      )
-      page(session, run)
-    })
-    text.default(
-      fallback = text.fstring(
-        "Result: %s",
-        text.required(
-          "unexpected report structure",
-          text.nonempty(
-            title(page)
+    text.bind(
+      run,
+      function(run) {
+        page <- local({
+          page <- page.report(
+            driver = httr.driver,
+            address,
+            client
           )
-        )
-      ),
-      origin = text.nonempty(
-        text.bind(
-          run,
-          function(run) {
+          page(session, run)
+        })
+        text.default(
+          fallback = text.fstring(
+            "Result: %s",
+            text.required(
+              "unexpected report structure",
+              text.nonempty(
+                title(page)
+              )
+            )
+          ),
+          origin = text.nonempty(
             report.pooling(
               status,
               downtime = 1,
               table(page)
             )
-          }
+          )
         )
-      )
+      }
     )
   })
   app.console(report)
