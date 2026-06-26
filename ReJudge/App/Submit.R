@@ -49,6 +49,7 @@ source("ReJudge/Domain/Run/Status.R")
 source("ReJudge/Domain/Report/Pooling.R")
 source("ReJudge/Domain/Report/Title.R")
 source("ReJudge/Domain/Report/Table.R")
+source("ReJudge/Domain/Report/Details.R")
 
 app.submit <- app.delegate(function() {
   address <- text.variable("BASE_URL")
@@ -198,32 +199,32 @@ app.submit <- app.delegate(function() {
   report <- local({
     table <- report.table(engine.xml2)
     title <- report.title(engine.xml2)
+    details <- report.details(engine.xml2)
     text.bind(
       run,
       function(run) {
-        page <- local({
-          page <- page.report(
-            driver = httr.driver,
-            address,
-            client
-          )
-          page(session, run)
-        })
-        text.default(
-          fallback = text.fstring(
-            "Result: %s",
-            text.required(
-              "unexpected report structure",
-              text.nonempty(
-                title(page)
-              )
-            )
-          ),
-          origin = text.nonempty(
+        page <- page.report(
+          driver = httr.driver,
+          address,
+          client
+        )
+        text.required(
+          "unexpected report structure",
+          text.nonempty(
             report.pooling(
               status,
               downtime = 1,
-              table(page)
+              text.bind(
+                page(session, run),
+                function(page) {
+                  text.fstring(
+                    "%s\n%s\n%s",
+                    title(page),
+                    table(page),
+                    details(page)
+                  )
+                }
+              )
             )
           )
         )

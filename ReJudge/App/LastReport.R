@@ -20,6 +20,7 @@ source("ReJudge/Domain/Problem/Id.R")
 source("ReJudge/Domain/Run/Last.R")
 source("ReJudge/Domain/Report/Table.R")
 source("ReJudge/Domain/Report/Title.R")
+source("ReJudge/Domain/Report/Details.R")
 
 app.lastreport <- app.delegate(function() {
   address <- text.variable("BASE_URL")
@@ -44,7 +45,7 @@ app.lastreport <- app.delegate(function() {
     client
   )
   id <- problem.id(engine.xml2)
-  run <- run.last(engine.xml2)
+  lastrun <- run.last(engine.xml2)
   main <- page.main(
     driver = httr.driver, 
     address,
@@ -53,6 +54,7 @@ app.lastreport <- app.delegate(function() {
   report <- local({
     table <- report.table(engine.xml2)
     title <- report.title(engine.xml2)
+    details <- report.details(engine.xml2)
     page <- local({
       page <- page.report(
         driver = httr.driver,
@@ -63,7 +65,7 @@ app.lastreport <- app.delegate(function() {
         session, 
         text.required(
           "there is no submissions for this problem :(",
-          run(
+          lastrun(
             problem(
               session,
               id(
@@ -75,18 +77,18 @@ app.lastreport <- app.delegate(function() {
         )
       )
     })
-    text.default(
-      fallback = text.fstring(
-        "Result: %s",
-        text.required(
-          "unexpected report structure",
-          text.nonempty(
-            title(page)
+    text.required(
+      "unexpected report structure",
+      text.bind(
+        page,
+        function(page) {
+          text.fstring(
+            "%s\n%s\n%s",
+            title(page),
+            table(page),
+            details(page)
           )
-        )
-      ),
-      origin = text.nonempty(
-        table(page)
+        }
       )
     )
   })
