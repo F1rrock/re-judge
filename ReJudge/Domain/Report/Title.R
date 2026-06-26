@@ -7,7 +7,7 @@ source("ReJudge/Collection/DropUntil.R")
 
 report.title <- function(engine) {
   dom <- dom(engine)
-  text <- element.text(dom)
+  text <- element.text(dom, separator = " ")
   function(page) {
     text.join(
       "\n",
