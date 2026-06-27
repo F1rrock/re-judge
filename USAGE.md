@@ -8,6 +8,8 @@
 
 ## Installation
 
+(Skip this step if you are already reading it in RStudio)
+
 To install the addins package, open the `RePackage/Installation/` directory in the repository on GitHub and choose a suitable installation script.
 
 Copy the script and run it in the R console in RStudio.
