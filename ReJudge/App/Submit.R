@@ -12,7 +12,6 @@ source("ReJudge/Text/Presets/Variable.R")
 source("ReJudge/Number/Number.R")
 source("ReJudge/Number/Difference.R")
 source("ReJudge/Number/Str.R")
-source("ReJudge/Spec/Spec.R")
 source("ReJudge/Collection/Map.R")
 source("ReJudge/Collection/Drop.R")
 source("ReJudge/Resource/Url.R")
@@ -20,8 +19,10 @@ source("ReJudge/File/RFile.R")
 source("ReJudge/File/Url.R")
 source("ReJudge/File/Name.R")
 source("ReJudge/File/Required.R")
+source("ReJudge/Spec/Spec.R")
 source("ReJudge/Script/RScript.R")
 source("ReJudge/Script/WithResources.R")
+source("ReJudge/Script/Context/Presets/OfStdIn.R")
 source("ReJudge/Page/Submit.R")
 source("ReJudge/Page/Status.R")
 source("ReJudge/Page/Main.R")
@@ -142,7 +143,8 @@ app.submit <- app.delegate(function() {
                 script.withresources(
                   script.r(
                     submission.file(submission),
-                    input(example)
+                    input(example),
+                    context.ofstdin
                   ),
                   collection.map(
                     function(x) {

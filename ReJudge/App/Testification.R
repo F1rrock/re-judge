@@ -4,15 +4,16 @@ source("ReJudge/Text/Asserted.R")
 source("ReJudge/Text/Result.R")
 source("ReJudge/Text/Palette.R")
 source("ReJudge/Text/Presets/Variable.R")
-source("ReJudge/Spec/Spec.R")
 source("ReJudge/Resource/Url.R")
 source("ReJudge/Collection/Map.R")
 source("ReJudge/File/Name.R")
 source("ReJudge/File/RFile.R")
 source("ReJudge/File/Url.R")
 source("ReJudge/File/Required.R")
+source("ReJudge/Spec/Spec.R")
 source("ReJudge/Script/RScript.R")
 source("ReJudge/Script/WithResources.R")
+source("ReJudge/Script/Context/Presets/OfStdIn.R")
 source("ReJudge/Page/Main.R")
 source("ReJudge/Page/Problem.R")
 source("ReJudge/Session/Ejudge.R")
@@ -88,7 +89,8 @@ app.testification <- app.delegate(
                 script.withresources(
                   script.r(
                     submission.file(submission),
-                    input(example)
+                    input(example),
+                    context.ofstdin
                   ),
                   collection.map(
                     function(x) {
