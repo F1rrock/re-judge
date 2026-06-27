@@ -24,7 +24,7 @@ perform.app_console <- function(x) {
         contents(
           text.red(
             text.fstring(
-              "Error: %s",
+              "Error: %s\n",
               conditionMessage(e)
             )
           )

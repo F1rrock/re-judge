@@ -1,4 +1,3 @@
-source("ReJudge/Spec/Spec.R")
 source("ReJudge/Collection/TakeUntil.R")
 source("ReJudge/Collection/DropUntil.R")
 source("ReJudge/Collection/Drop.R")
