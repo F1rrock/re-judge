@@ -4,11 +4,16 @@ source("ReJudge/Collection/Drop.R")
 source("ReJudge/Collection/SplitWhen.R")
 source("ReJudge/Text/Text.R")
 source("ReJudge/Text/First.R")
+source("ReJudge/Spec/Normalized.R")
 source("ReJudge/Domain/Problem/Example.R")
 
 problem.examples <- function(description) {
   collection.map(
-    function(block) problem.example(block),
+    function(block) {
+      spec.normalized(
+        problem.example(block)
+      )
+    },
     collection.filter(
       function(block) {
         identical(
