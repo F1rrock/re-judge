@@ -1,0 +1,5 @@
+source("ReJudge/Script/Context/Context.R")
+source("ReJudge/Script/Context/Lambda.R")
+source("ReJudge/Script/Context/Empty.R")
+source("ReJudge/Script/Context/StdIn/Manifest.R")
+source("ReJudge/Script/Context/Presets/Manifest.R")
