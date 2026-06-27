@@ -24,7 +24,7 @@ Restart RStudio. The addins will appear in the **Addins** menu.
 
 ## Configuration
 
-Create a `.env` file in the project root based on `.env.example`:
+Create a `.env` file (exactly that name) in the project (near to `.env.example`) root based on `.env.example` (just copy the contents):
 
 ```env
 LOGIN={LOGIN}
@@ -69,8 +69,6 @@ Use `scan()` to read input:
 x <- scan(quiet = TRUE)
 cat(x[1] + x[2])
 ```
-
-Do not use `readline()` or `readLines()` for contest input. Use `scan()` instead.
 
 ## Addins
 
