@@ -26,6 +26,8 @@ Restart RStudio. The addins will appear in the **Addins** menu.
 
 ## Configuration
 
+(If some functionality does not work as expected, restart the R session **Session → Restart R**)
+
 Create a `.env` file (exactly that name) in the project (near to `.env.example`) root based on `.env.example` (just copy the contents):
 
 ``` env
