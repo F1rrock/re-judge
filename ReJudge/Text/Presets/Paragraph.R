@@ -1,8 +1,8 @@
-source("ReJugde/Text/Lambda.R")
-source("ReJugde/Text/Default.R")
-source("ReJugde/Text/Bind.R")
-source("ReJugde/Text/NonEmpty.R")
-source("ReJugde/Text/Fstring.R")
+source("ReJudge/Text/Lambda.R")
+source("ReJudge/Text/Default.R")
+source("ReJudge/Text/Bind.R")
+source("ReJudge/Text/NonEmpty.R")
+source("ReJudge/Text/Fstring.R")
 
 text.paragraph <- text.lambda(
   function(text) {
