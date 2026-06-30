@@ -8,6 +8,7 @@ source("ReJudge/Text/Default.R")
 source("ReJudge/Text/Required.R")
 source("ReJudge/Text/NonEmpty.R")
 source("ReJudge/Text/Presets/Variable.R")
+source("ReJudge/Text/Presets/Paragraph.R")
 source("ReJudge/Page/Main.R")
 source("ReJudge/Page/Problem.R")
 source("ReJudge/Page/Report.R")
@@ -21,6 +22,7 @@ source("ReJudge/Domain/Run/Last.R")
 source("ReJudge/Domain/Report/Table.R")
 source("ReJudge/Domain/Report/Title.R")
 source("ReJudge/Domain/Report/Details.R")
+source("ReJudge/Domain/Report/Entire.R")
 
 app.lastreport <- app.delegate(function() {
   address <- text.variable("BASE_URL")
@@ -55,6 +57,7 @@ app.lastreport <- app.delegate(function() {
     table <- report.table(engine.xml2)
     title <- report.title(engine.xml2)
     details <- report.details(engine.xml2)
+    entire <- report.entire(engine.xml2)
     page <- local({
       page <- page.report(
         driver = httr.driver,
@@ -78,15 +81,23 @@ app.lastreport <- app.delegate(function() {
       )
     })
     text.required(
-      "unexpected report structure",
+      "the report was not received",
       text.bind(
         page,
         function(page) {
-          text.fstring(
-            "%s\n%s\n%s",
-            title(page),
-            table(page),
-            details(page)
+          text.default(
+            fallback = text.default(
+              fallback = "unexpected report structure",
+              origin = text.nonempty(entire(page))
+            ),
+            origin = text.nonempty(
+              text.fstring(
+                "%s%s%s",
+                text.paragraph(title(page)),
+                text.paragraph(table(page)),
+                text.paragraph(details(page))
+              )
+            )
           )
         }
       )

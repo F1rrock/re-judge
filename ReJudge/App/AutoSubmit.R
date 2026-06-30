@@ -5,6 +5,7 @@ source("ReJudge/Text/Required.R")
 source("ReJudge/Text/Default.R")
 source("ReJudge/Text/Palette.R")
 source("ReJudge/Text/Presets/Variable.R")
+source("ReJudge/Text/Presets/Paragraph.R")
 source("ReJudge/Number/Number.R")
 source("ReJudge/Number/Difference.R")
 source("ReJudge/Number/Str.R")
@@ -37,6 +38,7 @@ source("ReJudge/Domain/Report/Pooling.R")
 source("ReJudge/Domain/Report/Title.R")
 source("ReJudge/Domain/Report/Table.R")
 source("ReJudge/Domain/Report/Details.R")
+source("ReJudge/Domain/Report/Entire.R")
 
 app.autosubmit <- app.delegate(function() {
   address <- text.variable("BASE_URL")
@@ -142,6 +144,7 @@ app.autosubmit <- app.delegate(function() {
     table <- report.table(engine.xml2)
     title <- report.title(engine.xml2)
     details <- report.details(engine.xml2)
+    entire <- report.entire(engine.xml2)
     text.bind(
       run,
       function(run) {
@@ -159,11 +162,19 @@ app.autosubmit <- app.delegate(function() {
               text.bind(
                 page(session, run),
                 function(page) {
-                  text.fstring(
-                    "%s\n%s\n%s",
-                    title(page),
-                    table(page),
-                    details(page)
+                  text.default(
+                    fallback = text.default(
+                      fallback = "unexpected report structure",
+                      origin = text.nonempty(entire(page))
+                    ),
+                    origin = text.nonempty(
+                      text.fstring(
+                        "%s%s%s",
+                        text.paragraph(title(page)),
+                        text.paragraph(table(page)),
+                        text.paragraph(details(page))
+                      )
+                    )
                   )
                 }
               )
