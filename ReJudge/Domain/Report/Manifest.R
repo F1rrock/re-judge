@@ -1,3 +1,5 @@
 source("ReJudge/Domain/Report/Title.R")
 source("ReJudge/Domain/Report/Table.R")
 source("ReJudge/Domain/Report/Pooling.R")
+source("ReJudge/Domain/Report/Details.R")
+source("ReJudge/Domain/Report/Entire.R")
