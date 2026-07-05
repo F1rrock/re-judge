@@ -8,7 +8,7 @@ source("ReJudge/Text/Default.R")
 source("ReJudge/Text/Asserted.R")
 source("ReJudge/Text/Result.R")
 source("ReJudge/Text/Palette.R")
-source("ReJudge/Text/Presets/Variable.R")
+source("ReJudge/Workspace/Env/Presets/Variable.R")
 source("ReJudge/Text/Presets/Paragraph.R")
 source("ReJudge/Number/Number.R")
 source("ReJudge/Number/Difference.R")
@@ -35,8 +35,9 @@ source("ReJudge/Json/JsonLite.R")
 source("ReJudge/Dom/Xml2.R")
 source("ReJudge/Http/Httr/Driver.R")
 source("ReJudge/Workspace/RStudio/Current.R")
+source("ReJudge/Workspace/Console/Presets/Message.R")
 source("ReJudge/App/Delegate.R")
-source("ReJudge/App/Console.R")
+source("ReJudge/App/Effect.R")
 source("ReJudge/Domain/Problem/Id.R")
 source("ReJudge/Domain/Problem/Description.R")
 source("ReJudge/Domain/Problem/Attachments.R")
@@ -55,8 +56,8 @@ source("ReJudge/Domain/Report/Details.R")
 source("ReJudge/Domain/Report/Entire.R")
 
 app.submit <- app.delegate(function() {
-  address <- text.variable("BASE_URL")
-  client <- text.variable("CLIENT_PATH")
+  address <- env.variable("BASE_URL")
+  client <- env.variable("CLIENT_PATH")
   session <- local({
     auth <- session.ejudge(
       driver = httr.driver,
@@ -65,9 +66,9 @@ app.submit <- app.delegate(function() {
     )
     session.ready(
       auth(
-        login   = text.variable("LOGIN"),
-        pass    = text.variable("PASSWORD"),
-        contest = text.variable("CONTEST_ID")
+        login   = env.variable("LOGIN"),
+        pass    = env.variable("PASSWORD"),
+        contest = env.variable("CONTEST_ID")
       )
     )
   })
@@ -244,5 +245,7 @@ app.submit <- app.delegate(function() {
       }
     )
   })
-  app.console(report)
+  app.effect(
+    console.message(report)
+  )
 })

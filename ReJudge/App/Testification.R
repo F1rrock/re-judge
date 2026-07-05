@@ -3,7 +3,7 @@ source("ReJudge/Text/Then.R")
 source("ReJudge/Text/Asserted.R")
 source("ReJudge/Text/Result.R")
 source("ReJudge/Text/Palette.R")
-source("ReJudge/Text/Presets/Variable.R")
+source("ReJudge/Workspace/Env/Presets/Variable.R")
 source("ReJudge/Resource/Url.R")
 source("ReJudge/Collection/Map.R")
 source("ReJudge/File/Name.R")
@@ -21,8 +21,9 @@ source("ReJudge/Session/Presets/Ready.R")
 source("ReJudge/Dom/Xml2.R")
 source("ReJudge/Http/Httr/Driver.R")
 source("ReJudge/Workspace/RStudio/Current.R")
+source("ReJudge/Workspace/Console/Presets/Message.R")
 source("ReJudge/App/Delegate.R")
-source("ReJudge/App/Console.R")
+source("ReJudge/App/Effect.R")
 source("ReJudge/Domain/Problem/Id.R")
 source("ReJudge/Domain/Problem/Description.R")
 source("ReJudge/Domain/Problem/Examples.R")
@@ -32,8 +33,8 @@ source("ReJudge/Domain/Submission/Title.R")
 
 app.testification <- app.delegate(
   function() {
-    address <- text.variable("BASE_URL")
-    client <- text.variable("CLIENT_PATH")
+    address <- env.variable("BASE_URL")
+    client <- env.variable("CLIENT_PATH")
     session <- local({
       auth <- session.ejudge(
         driver = httr.driver,
@@ -42,9 +43,9 @@ app.testification <- app.delegate(
       )
       session.ready(
         auth(
-          login   = text.variable("LOGIN"),
-          pass    = text.variable("PASSWORD"),
-          contest = text.variable("CONTEST_ID")
+          login   = env.variable("LOGIN"),
+          pass    = env.variable("PASSWORD"),
+          contest = env.variable("CONTEST_ID")
         )
       )
     })
@@ -114,6 +115,8 @@ app.testification <- app.delegate(
       ),
       text.green("Sample tests passed!")
     )
-    app.console(verdict)
+    app.effect(
+      console.message(verdict)
+    )
   }
 )

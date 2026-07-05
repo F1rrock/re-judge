@@ -4,18 +4,19 @@ source("ReJudge/Http/Httr/Driver.R")
 source("ReJudge/Text/Required.R")
 source("ReJudge/Text/NonEmpty.R")
 source("ReJudge/Text/Join.R")
-source("ReJudge/Text/Presets/Variable.R")
+source("ReJudge/Workspace/Env/Presets/Variable.R")
+source("ReJudge/Workspace/Console/Presets/Message.R")
 source("ReJudge/Number/Str.R")
 source("ReJudge/Page/Main.R")
 source("ReJudge/Dom/Xml2.R")
 source("ReJudge/Collection/Map.R")
 source("ReJudge/App/Delegate.R")
-source("ReJudge/App/Console.R")
+source("ReJudge/App/Effect.R")
 source("ReJudge/Domain/Problems/List.R")
 
 app.problems <- app.delegate(function() {
-  address <- text.variable("BASE_URL")
-  client <- text.variable("CLIENT_PATH")
+  address <- env.variable("BASE_URL")
+  client <- env.variable("CLIENT_PATH")
   session <- local({
     auth <- session.ejudge(
       driver  = httr.driver,
@@ -24,9 +25,9 @@ app.problems <- app.delegate(function() {
     )
     session.ready(
       auth(
-        login = text.variable("LOGIN"),
-        pass = text.variable("PASSWORD"),
-        contest = text.variable("CONTEST_ID")
+        login = env.variable("LOGIN"),
+        pass = env.variable("PASSWORD"),
+        contest = env.variable("CONTEST_ID")
       )
     )
   })
@@ -36,17 +37,19 @@ app.problems <- app.delegate(function() {
     client
   )
   problems <- problems.list(engine.xml2)
-  app.console(
-    text.fstring(
-      "Available problems:\n%s",
-      text.required(
-        "can not fetch problems list",
-        text.nonempty(
-          text.join(
-            ", ",
-            problems(
-              page(
-                session
+  app.effect(
+    console.message(
+      text.fstring(
+        "Available problems:\n%s",
+        text.required(
+          "can not fetch problems list",
+          text.nonempty(
+            text.join(
+              ", ",
+              problems(
+                page(
+                  session
+                )
               )
             )
           )
