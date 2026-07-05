@@ -1,5 +1,4 @@
 source("ReJudge/Text/Empty.R")
-source("ReJudge/Text/Env.R")
 source("ReJudge/Text/Fstring.R")
 source("ReJudge/Text/First.R")
 source("ReJudge/Text/Payload.R")
