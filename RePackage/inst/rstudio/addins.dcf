@@ -28,6 +28,11 @@ Description: Local testing via sample test
 Binding: testification
 Interactive: false
 
+Name: Switch contest
+Description: Switch current contest
+Binding: switchcontest
+Interactive: true
+
 Name: Submit the solution
 Description: Submit current file as ejudge solution
 Binding: autosubmit
