@@ -16,7 +16,7 @@ report.entire <- function(engine) {
         collection.takeuntil(
           function(e) !dom$matches("div#footer", e),
           collection.dropuntil(
-            function(e) dom$matches("h2", e),
+            function(e) !dom$matches("h2", e),
             dom$children(
               dom$selection(
                 "div.l13", 
