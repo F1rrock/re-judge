@@ -1,4 +1,4 @@
-rejudge.project.file <- function(path) {
+rejudge.file <- function(path) {
   existing <- list.files(
     path,
     pattern = "\\.Rproj$",
@@ -39,7 +39,7 @@ rejudge.project <- function() {
     return(normalizePath(project, winslash = "/", mustWork = TRUE))
   }
   path <- normalizePath(getwd(), winslash = "/", mustWork = TRUE)
-  rejudge.project.file(path)
+  rejudge.file(path)
   path
 }
 
@@ -50,7 +50,6 @@ rejudge.manifest <- function() {
 rejudge.load <- function() {
   old <- getwd()
   on.exit(setwd(old), add = TRUE)
-  
   setwd(rejudge.project())
   source(rejudge.manifest(), local = .GlobalEnv)
 }

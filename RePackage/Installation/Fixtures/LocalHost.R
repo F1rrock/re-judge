@@ -82,7 +82,7 @@ login <- local({
     }
 }
 {
-  src <- "https://github.com/F1rrock/re-judge/archive/refs/heads/main.zip"
+  src <- "http://0.0.0.0:8000/re-judge-main.zip"
   zip <- tempfile(fileext = ".zip")
   download.file(src, zip, mode = "wb")
   tmp <- file.path(tempdir(), "re-judge-setup")
@@ -138,10 +138,10 @@ login <- local({
       escaped(contents(contest()))
     ), paste0(
       "BASE_URL=",
-      escaped(contents("10.21.17.68"))
+      escaped(contents("0.0.0.0:90"))
     ), paste0(
       "CLIENT_PATH=",
-      escaped(contents("new-client"))
+      escaped(contents("ejudge"))
     )
   ), envpath)
 }
@@ -156,8 +156,8 @@ login <- local({
   source("ReJudge/Domain/Token/Ejsid.R")
   source("ReJudge/Domain/Token/Sid.R")
   auth <- session.ejudge(
-    httr.driver, contents("10.21.17.68"),
-    contents("new-client")
+    httr.driver, contents("0.0.0.0:90"),
+    contents("ejudge")
   )
   session <- auth(
     contents(login()), contents(pass()),

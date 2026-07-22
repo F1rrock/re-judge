@@ -82,7 +82,7 @@ login <- local({
     }
 }
 {
-  src <- "https://github.com/F1rrock/re-judge/archive/refs/heads/main.zip"
+  src <- "http://10.21.17.68/files/re-judge/re-judge-main.zip"
   zip <- tempfile(fileext = ".zip")
   download.file(src, zip, mode = "wb")
   tmp <- file.path(tempdir(), "re-judge-setup")

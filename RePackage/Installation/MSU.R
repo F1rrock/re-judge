@@ -5,11 +5,11 @@ writeLines(
     rejudge.load()
     code(
       installation.full(
-        provider.github,
+        provider.msu,
         endpoint.msu,
         client.newclient
       )
     )
   },
-  "RePackage/Installation/Fixtures/GitHub.R"
+  "RePackage/Installation/Fixtures/MSU.R"
 )

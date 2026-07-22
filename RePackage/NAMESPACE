@@ -1,5 +1,7 @@
 importFrom(rstudioapi, getActiveProject)
 importFrom(rstudioapi, getSourceEditorContext)
+importFrom(dotenv, load_dot_env)
+importFrom(styler, style_text)
 importFrom(httr, VERB)
 importFrom(xml2, read_html)
 importFrom(xml2, xml_children)

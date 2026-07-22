@@ -5,11 +5,11 @@ writeLines(
     rejudge.load()
     code(
       installation.full(
-        provider.github,
-        endpoint.msu,
-        client.newclient
+        provider.localhost,
+        endpoint.localhost,
+        client.ejudge
       )
     )
   },
-  "RePackage/Installation/Fixtures/GitHub.R"
+  "RePackage/Installation/Fixtures/LocalHost.R"
 )
