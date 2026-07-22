@@ -23,9 +23,9 @@ session.ejudge = function(driver, address, client) {
               )$
               with('Content-Type', member.text('application/x-www-form-urlencoded')),
             body    = body(request)$
-              with('contest_id', member.text(contest))$
               with('login', member.text(login))$
               with('password', member.text(pass))$
+              with('contest_id', member.text(contest))$
               with('action_2', member.text('Log in')),
             encode  = 'form'
           )
