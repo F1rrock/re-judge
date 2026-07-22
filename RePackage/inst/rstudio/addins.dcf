@@ -28,6 +28,11 @@ Description: Local testing via sample test
 Binding: testification
 Interactive: false
 
+Name: Change credentials
+Description: Change current login, password and contest
+Binding: credentials
+Interactive: true
+
 Name: Switch contest
 Description: Switch current contest
 Binding: switchcontest
