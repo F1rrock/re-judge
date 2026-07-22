@@ -18,6 +18,7 @@ installation.authorized <- function(login, pass, contest, url, client, origin) {
                     source("ReJudge/Http/Httr/Driver.R")
                     source("ReJudge/Text/Required.R")
                     source("ReJudge/Text/Text.R")
+                    source("ReJudge/Text/Fstring.R")
                     source("ReJudge/Text/Then.R")
                     source("ReJudge/Text/Token.R")
                     source("ReJudge/Text/NonEmpty.R")
@@ -35,7 +36,12 @@ installation.authorized <- function(login, pass, contest, url, client, origin) {
                     )
                     contents(
                       text.required(
-                        "authorization failed",
+                        text.fstring(
+                          "%s\n%s\n%s\n",
+                          "could not authorize with ejudge.",
+                          "Open Addins → Change credentials,",
+                          "to verify your settings."
+                        ),
                         text.then(
                           text.nonempty(
                             text.token(
