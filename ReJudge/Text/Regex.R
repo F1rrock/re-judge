@@ -15,7 +15,7 @@ contents.text_regex <- function(x) {
   val <- contents(x$origin)
   match <- regmatches(
     val,
-    regexec(contents(x$pattern), val)
+    regexec(contents(x$pattern), val, perl = TRUE)
   )[[1]][-1]
   if (length(match) > 0) match[[1]] else contents(x$default)
 }
