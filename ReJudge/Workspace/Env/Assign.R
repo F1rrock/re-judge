@@ -12,7 +12,7 @@ env.assign <- function(name, value) {
       pattern <- paste0("^", gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", key), "=")
       idx <- grep(pattern, lines)
       entry <- paste0(key, "=", val)
-      if (!length(idx)) stop("no such variable \"CONTEST_ID\" in .env file")
+      if (!length(idx)) stop(sprintf("no such variable \"%s\" in .env file", name))
       lines <- c(lines[-idx], entry)
       writeLines(lines, path, useBytes = TRUE)
     }

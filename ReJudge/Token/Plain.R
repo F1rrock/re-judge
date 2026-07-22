@@ -1,3 +1,4 @@
+source("ReJudge/Text/Text.R")
 source("ReJudge/Token/Token.R")
 
 token.plain <- function(value, expiration) {
