@@ -5,13 +5,17 @@ source("ReJudge/Installation/Lambda.R")
 installation.verbose <- function(msg, origin) {
   installation.lambda(
     function() {
-      c(
+      paste(
         code(origin),
-        deparse(
-          bquote(
-            message(.(contents(msg)))
-          )
-        )
+        paste(
+          deparse(
+            bquote(
+              message(.(contents(msg)))
+            )
+          ),
+          collapse = "\n"
+        ),
+        sep = "\n"
       )
     }
   )

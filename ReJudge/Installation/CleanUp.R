@@ -4,22 +4,26 @@ source("ReJudge/Installation/Lambda.R")
 installation.cleanup <- function(origin) {
   installation.lambda(
     function() {
-      c(
-        deparse(
-          quote({
-            if ("package:ReJudge" %in% search()) {
-              detach("package:ReJudge", unload = TRUE)
-            }
-            if ("ReJudge" %in% loadedNamespaces()) {
-              unloadNamespace("ReJudge")
-            }
-            pkg <- file.path(.libPaths()[1], "ReJudge")
-            if (dir.exists(pkg)) {
-              unlink(pkg, recursive = TRUE, force = TRUE)
-            }
-          })
+      paste(
+        paste(
+          deparse(
+            quote({
+              if ("package:ReJudge" %in% search()) {
+                detach("package:ReJudge", unload = TRUE)
+              }
+              if ("ReJudge" %in% loadedNamespaces()) {
+                unloadNamespace("ReJudge")
+              }
+              pkg <- file.path(.libPaths()[1], "ReJudge")
+              if (dir.exists(pkg)) {
+                unlink(pkg, recursive = TRUE, force = TRUE)
+              }
+            })
+          ),
+          collapse = "\n"
         ),
-        code(origin)
+        code(origin),
+        sep = "\n"
       )
     }
   )
